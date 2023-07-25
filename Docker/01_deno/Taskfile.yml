@@ -1,0 +1,31 @@
+version: '3'
+
+vars:
+  container_name: deno
+  image_name: mooxe/{{.container_name}}
+
+tasks:
+
+  help: task --list-all
+  default:
+    - task: help
+
+  build:
+    - docker system prune
+    - docker build -t {{.image_name}} .
+
+  push: docker push {{.image_name}}
+  run:
+    - docker run -ti --rm
+        -p 9000:9000
+        --name {{.container_name}}
+        {{.image_name}}
+
+  rund:
+    - docker run -d
+        -p 9000:9000
+        --name {{.container_name}}
+        {{.image_name}}
+
+  logs: docker logs -f {{.container_name}}
+  rm: docker rm -f {{.container_name}}

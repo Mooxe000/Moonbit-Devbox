@@ -1,0 +1,26 @@
+version: '3'
+
+vars:
+  container_name: gotask
+  image_name: mooxe/{{.container_name}}
+
+tasks:
+
+  help: task --list-all
+  default:
+    - task: help
+
+  build: docker build -t {{.image_name}} .
+  push: docker push {{.image_name}}
+  run:
+    - docker run -ti --rm
+        --name {{.container_name}}
+        {{.image_name}}
+
+  rund:
+    - docker run -d
+        --name {{.container_name}}
+        {{.image_name}}
+
+  logs: docker logs -f {{.container_name}}
+  rm: docker rm -f {{.container_name}}
