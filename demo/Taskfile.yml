@@ -1,0 +1,19 @@
+version: '3'
+
+vars:
+  container_name: moonbit-demo
+  image_name: mooxe/moonbit
+
+tasks:
+
+  help: task --list-all
+  default:
+    - task: help
+
+  dev:
+    - podman run -ti --rm
+        -p 9000:9000
+        -v $(pwd):/app
+        --name {{.container_name}}
+        {{.image_name}}
+        /bin/bash
