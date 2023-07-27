@@ -1,0 +1,27 @@
+version: '3'
+
+tasks:
+
+  help: task --list-all
+  default:
+    - task: help
+
+  moonbuild: moon build
+  moonrun: moon run
+
+  wasmbuild: wat2wasm ./target/build/main/main.wat
+
+  build:
+    cmds:
+      - task: moonbuild
+      - task: wasmbuild
+
+  denorun:
+    deps:
+      - build
+    cmds:
+      - deno run -A ./deno/index.js
+
+  run:
+    cmds:
+      - task: denorun
