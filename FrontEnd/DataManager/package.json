@@ -1,0 +1,47 @@
+{
+  "name": "vue-naive-admin",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "vite build",
+    "build:github": "vite build --mode github && esno ./build/script",
+    "build:test": "vite build --mode test",
+    "dev": "vite",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@vueuse/core": "^9.13.0",
+    "@wangeditor/editor": "^5.1.23",
+    "@wangeditor/editor-for-vue": "^5.1.12",
+    "@zclzone/utils": "^0.0.8",
+    "axios": "^1.4.0",
+    "dayjs": "^1.11.8",
+    "lodash-es": "^4.17.21",
+    "md-editor-v3": "^2.11.3",
+    "mockjs": "^1.1.0",
+    "pinia": "^2.1.4",
+    "vite": "^4.3.9",
+    "vue": "3.3.0-beta.5",
+    "vue-router": "^4.2.2",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@iconify/json": "^2.2.84",
+    "@iconify/vue": "^4.1.1",
+    "@vitejs/plugin-vue": "^4.2.3",
+    "@vue/compiler-sfc": "^3.3.4",
+    "chalk": "^5.2.0",
+    "dotenv": "^16.3.1",
+    "esno": "^0.16.3",
+    "naive-ui": "^2.34.4",
+    "rollup-plugin-visualizer": "^5.9.2",
+    "sass": "^1.63.6",
+    "unocss": "^0.53.4",
+    "unplugin-auto-import": "^0.15.3",
+    "unplugin-icons": "^0.15.3",
+    "unplugin-vue-components": "^0.24.1",
+    "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-html": "^3.2.0",
+    "vite-plugin-mock": "^2.9.8",
+    "vite-plugin-svg-icons": "^2.0.1"
+  }
+}
