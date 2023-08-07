@@ -1,0 +1,59 @@
+version: '3'
+
+vars:
+  root_dir:
+    sh: pwd
+  watch_dir: '{{.root_dir}}/src'
+  watch_name: pugbuild
+
+tasks:
+
+  help: task --list-all
+  default:
+    - task: help
+
+  clean: rm -rf ./build
+  build:
+    deps:
+      - clean
+    cmds:
+      - deno run -A ./script/build.js
+  serve:
+    deps:
+      - build
+    cmds:
+      - deno run -A ./script/serve.js
+
+  watch-def: watchman watch {{.watch_dir}}
+  watch-list: watchman watch-list
+  # '{{.root_dir}}/src/**/*.pug'
+  watch-trigger-def:
+    watchman
+      -- trigger {{.watch_dir}}
+          {{.watch_name}}
+          '**/*.pug'
+      -- {{.root_dir}}/script/watchbuild.sh
+  watch-trigger-list:
+    watchman
+      trigger-list
+      {{.watch_dir}}
+  watch-trigger-del:
+    watchman
+      trigger-del
+      {{.watch_dir}} pugbuild
+  watch-clean:
+    - watchman watch-del-all
+    - watchman shutdown-server
+
+  watch:
+    cmds:
+      - task: watch-clean
+      - task: watch-def
+      - task: watch-list
+      - task: watch-trigger-def
+      - task: watch-trigger-list
+
+  serve-w:
+    deps:
+      - serve
+      - watch
