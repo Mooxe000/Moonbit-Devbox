@@ -12,7 +12,9 @@ tasks:
 
   build:
     - docker system prune
-    - docker build -t {{.image_name}} .
+    - docker build
+        --no-cache
+        -t {{.image_name}} .
 
   push: docker push {{.image_name}}
   run:

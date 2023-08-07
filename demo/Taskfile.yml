@@ -11,6 +11,7 @@ tasks:
     - task: help
 
   dev:
+    - podman pull {{.image_name}}
     - podman run -ti --rm
         -p 9000:9000
         -v $(pwd):/app
