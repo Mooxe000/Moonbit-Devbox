@@ -4,15 +4,14 @@ import {
   ensureDir
 , exists
 , copy
-} from "https://deno.land/std/fs/mod.ts";
+} from "https://deno.land/std/fs/mod.ts"
 
 const pubTmpl = await Deno.readTextFile('./src/index.pug')
 
 // console.log(pubTmpl)
 
-const fn = pugCompile( pubTmpl
-, { filename: './src/pug/body.pug' }
-)
+// filename: './src/pug/body.pug'
+const fn = pugCompile( pubTmpl, {} )
 
 const html = fn()
 

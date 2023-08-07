@@ -18,6 +18,10 @@ tasks:
       - clean
     cmds:
       - deno run -A ./script/build.js
+      - deno run -A ./script/bundle.js
+      # - mkdir -p ./build/assets
+      # - deno bundle ./src/index.js
+      #     ./build/assets/index.bundle.js
   serve:
     deps:
       - build

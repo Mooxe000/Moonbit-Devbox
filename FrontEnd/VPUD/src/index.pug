@@ -10,22 +10,5 @@ html(lang="en")
     link(rel="stylesheet" href="https://jsd.cdn.zzko.cn/npm/@unocss/reset/tailwind.min.css")
 
   body
-    //- include body.pug
 
-script(type="module").
-
-  const {
-    a, div, li, p, ul
-  } = van.tags
-
-  const Hello = () => div(
-    p("👋Hello")
-  , ul(
-      li("🗺️World")
-    , li(a({href: "https://vanjs.org/"}, "🍦VanJS"))
-    )
-  )
-
-  van.add(document.body, Hello())
-  //- van.add(document.getElementById('root'), Hello())
-
+script(type="module" src='./static/index.bundle.js')
