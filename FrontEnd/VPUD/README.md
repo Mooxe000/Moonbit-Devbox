@@ -12,6 +12,10 @@
 - STYLE
   - [unocss](https://unocss.dev/)
   - [ikunUI](https://ikun-ui.netlify.app/)
+  - [tailblocks](https://tailblocks.cc/)
 
 - language
   - [Moonbit](https://zh.moonbitlang.com/)
+  - [Grain](https://grain-lang.org/)
+  - [Juvix](https://docs.juvix.org/)
+  - [Zig](https://ziglang.org/zh/)
