@@ -26,7 +26,8 @@ RUN axel -k \
 RUN dpkg -b ./wabt wabt-${WABT_VERSION}.deb \
 &&  dpkg -i wabt-${WABT_VERSION}.deb \
 &&  rm wabt-${WABT_VERSION}.deb \
-&&  rm -rf ./wabt
+&&  rm -rf ./wabt \
+&&  rm -rf /wabt-${WABT_VERSION}
 
 RUN /bin/bash -c \
     "$(curl -fsSL https://www.moonbitlang.com/release/ubuntu_x86_64_moon_setup.sh)"

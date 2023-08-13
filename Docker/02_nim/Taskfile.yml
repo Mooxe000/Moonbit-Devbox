@@ -1,7 +1,7 @@
 version: '3'
 
 vars:
-  container_name: moonbit
+  container_name: nim
   image_name: mooxe/{{.container_name}}
 
 tasks:
@@ -12,21 +12,19 @@ tasks:
 
   build:
     - docker system prune
+    # --no-cache
     - docker build
-        --no-cache
         -t {{.image_name}} .
 
   push: docker push {{.image_name}}
   run:
     - docker run -ti --rm
-        -p 9000:9000
         --name {{.container_name}}
         {{.image_name}}
         /bin/bash
 
   rund:
     - docker run -d
-        -p 9000:9000
         --name {{.container_name}}
         {{.image_name}}
 

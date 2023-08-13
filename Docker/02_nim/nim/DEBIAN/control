@@ -1,0 +1,5 @@
+Package: nim
+Version: 2.0.1
+Architecture: amd64
+Maintainer: Nim Lang
+Description: Nim Lang

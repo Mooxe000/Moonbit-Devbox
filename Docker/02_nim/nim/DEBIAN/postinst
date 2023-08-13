@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+chmod +x /nim-2.0.1/install.sh
+cd /nim-2.0.1
+./install.sh /usr/share
+ln -s /usr/share/nim/bin/nim /usr/local/bin/nim
