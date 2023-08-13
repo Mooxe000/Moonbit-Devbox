@@ -1,0 +1,5 @@
+Package: wasi-sdk
+Version: 20.0
+Architecture: amd64
+Maintainer: WebAssembly
+Description: WebAssembly C/C++ toolchain

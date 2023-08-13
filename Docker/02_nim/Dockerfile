@@ -38,23 +38,31 @@ RUN axel -k \
     https://download.fastgit.org/aduros/wasm4/releases/latest/download/w4-linux.zip \
 &&  unzip w4-linux.zip \
 &&  mv w4 /usr/local/bin \
-&& rm -rf w4-linux.zip
+&&  rm -rf w4-linux.zip
 
-RUN mkdir -p /app/wabt
-ADD ./wabt /app/wabt
-
-ENV WABT_VERSION 1.0.33
-# https://github.com/WebAssembly/wabt/releases
+# https://github.com/nim-lang/nimble/releases
 RUN axel -k \
-    https://download.fastgit.org/WebAssembly/wabt/releases/download/${WABT_VERSION}/wabt-${WABT_VERSION}-ubuntu.tar.gz \
-&&  tar -C ./wabt -xvf wabt-${WABT_VERSION}-ubuntu.tar.gz \
-&&  mv ./wabt/wabt-${WABT_VERSION}/* ./wabt \
-&&  rm -rf wabt-${WABT_VERSION}-ubuntu.tar.gz
+    https://download.fastgit.org/nim-lang/nimble/releases/download/latest/nimble-linux_x64.tar.gz \
+&&  tar xvf nimble-linux_x64.tar.gz \
+&&  mv nimble /usr/local/bin \
+&&  rm -rf nimble-linux_x64.tar.gz
 
-RUN dpkg -b ./wabt wabt-${WABT_VERSION}.deb \
-&&  dpkg -i wabt-${WABT_VERSION}.deb \
-&&  rm wabt-${WABT_VERSION}.deb \
-&&  rm -rf ./wabt \
-&&  rm -rf /wabt-${WABT_VERSION}
+RUN mkdir -p /app/wasi-sdk
+ADD ./wasi-sdk /app/wasi-sdk
+
+ENV WASI_SDK_VERSION 20.0
+# https://github.com/WebAssembly/wasi-sdk/releases
+RUN axel -k \
+    https://download.fastgit.org/WebAssembly/wasi-sdk/releases/download/wasi-sdk-20/wasi-sdk-${WASI_SDK_VERSION}-linux.tar.gz \
+&&  tar -C ./wasi-sdk -xvf wasi-sdk-${WASI_SDK_VERSION}-linux.tar.gz \
+&&  mv ./wasi-sdk/wasi-sdk-${WASI_SDK_VERSION}/* ./wasi-sdk \
+&&  rm -rf wasi-sdk-${WASI_SDK_VERSION}-linux.tar.gz
+
+RUN dpkg -b ./wasi-sdk wasi-sdk-${WASI_SDK_VERSION}.deb \
+&&  dpkg -i wasi-sdk-${WASI_SDK_VERSION}.deb \
+&&  rm wasi-sdk-${WASI_SDK_VERSION}.deb \
+&&  rm -rf ./wasi-sdk
+
+ENV WASI_SDK_PATH /wasi-sdk-${WASI_SDK_VERSION}
 
 # CMD [ "nim" ]
