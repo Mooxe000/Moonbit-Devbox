@@ -1,0 +1,17 @@
+version: '3'
+
+tasks:
+
+  help: task --list-all
+  default:
+    - task: help
+
+  new:
+    w4 new --nim hello-world
+
+  build:
+    cd hello-world
+    ; nimble rel
+
+  run:
+    w4 run -n hello-world/build/cart.wasm

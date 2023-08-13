@@ -1,0 +1,5 @@
+Package: binaryen
+Version: 114
+Architecture: amd64
+Maintainer: WebAssembly
+Description: Optimizer and compiler/toolchain library for WebAssembly

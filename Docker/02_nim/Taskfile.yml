@@ -19,6 +19,7 @@ tasks:
   push: docker push {{.image_name}}
   run:
     - docker run -ti --rm
+        -p 4444:4444
         --name {{.container_name}}
         {{.image_name}}
         /bin/bash

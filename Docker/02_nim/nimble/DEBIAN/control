@@ -1,5 +1,0 @@
-Package: nimble
-Version: 1.0.33
-Architecture: amd64
-Maintainer: WebAssembly
-Description: The WebAssembly Binary Toolkit

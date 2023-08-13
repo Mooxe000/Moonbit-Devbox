@@ -1,0 +1,20 @@
+version: '3'
+
+vars:
+  container_name: nim
+  image_name: mooxe/nim
+
+tasks:
+
+  help: task --list-all
+  default:
+    - task: help
+
+  dev:
+    - podman pull {{.image_name}}
+    - podman run -ti --rm
+        -p 4444:4444
+        -v $(pwd):/app
+        --name {{.container_name}}
+        {{.image_name}}
+        /bin/bash
