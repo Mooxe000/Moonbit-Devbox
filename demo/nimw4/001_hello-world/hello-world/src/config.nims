@@ -1,7 +1,8 @@
 import std/os
 
 let wasi = getEnv("WASI_SDK_PATH")
-if wasi == "" and not defined(nimsuggest):
+if wasi == "" and not defined(nimsuggest)
+:
   echo ""
   echo "Error:"
   echo "Download the WASI SDK (https://github.com/WebAssembly/wasi-sdk) and set the $WASI_SDK_PATH environment variable!"
@@ -13,7 +14,7 @@ switch("cc", "clang")
 
 # ARC is much more embedded-friendly
 switch("gc", "arc")
-# Treats defects as errors, results in smaller binary size 
+# Treats defects as errors, results in smaller binary size
 switch("panics", "on")
 
 # Use the common ANSI C target
@@ -35,7 +36,8 @@ switch("passC", "--sysroot=" & (wasi / "share" / "wasi-sysroot"))
 
 switch("passL", "-Wl,-zstack-size=14752,--no-entry,--import-memory -mexec-model=reactor -Wl,--initial-memory=65536,--max-memory=65536,--stack-first")
 
-when not defined(release):
+when not defined(release)
+:
   switch("assertions", "off")
   switch("checks", "off")
   switch("stackTrace", "off")
