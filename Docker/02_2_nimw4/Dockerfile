@@ -33,19 +33,19 @@ RUN cd ./nim-${NIM_VERSION} \
 
 # RUN apt-get install -y emscripten
 
-RUN apt-get install -y unzip
-RUN axel -k \
-    https://download.fastgit.org/aduros/wasm4/releases/latest/download/w4-linux.zip \
-&&  unzip w4-linux.zip \
-&&  mv w4 /usr/local/bin \
-&&  rm -rf w4-linux.zip
-
 # https://github.com/nim-lang/nimble/releases
 RUN axel -k \
     https://download.fastgit.org/nim-lang/nimble/releases/download/latest/nimble-linux_x64.tar.gz \
 &&  tar xvf nimble-linux_x64.tar.gz \
 &&  mv nimble /usr/local/bin \
 &&  rm -rf nimble-linux_x64.tar.gz
+
+RUN apt-get install -y unzip
+RUN axel -k \
+    https://download.fastgit.org/aduros/wasm4/releases/latest/download/w4-linux.zip \
+&&  unzip w4-linux.zip \
+&&  mv w4 /usr/local/bin \
+&&  rm -rf w4-linux.zip
 
 RUN mkdir -p /app/wasi-sdk
 ADD ./wasi-sdk /app/wasi-sdk

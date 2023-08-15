@@ -1,7 +1,7 @@
 version: '3'
 
 vars:
-  container_name: nimw4
+  container_name: nim
   image_name: mooxe/{{.container_name}}
 
 tasks:
@@ -13,7 +13,6 @@ tasks:
   dev:
     - podman pull {{.image_name}}
     - podman run -ti --rm
-        -p 4444:4444
         -v $(pwd):/app
         --name {{.container_name}}
         {{.image_name}}

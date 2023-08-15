@@ -1,0 +1,29 @@
+version: '3'
+
+tasks:
+
+  help: task --list-all
+  default:
+    - task: help
+
+  clean:
+    - rm -rf ./template.html
+
+  template.html:
+    deps:
+      - clean
+    cmds:
+      - mkdir -p ./tmp
+      - axel -k -o ./tmp/template.html
+          https://raw.githubusercontent.com/kripken/emscripten/master/src/shell_minimal.html
+      - sed 's/<script/<script src="https:\/\/ajax.googleapis.com\/ajax\/libs\/dojo\/1.13.0\/dojo\/dojo.js"><\/script>\n    <script/' ./tmp/template.html > template.html
+      - rm -rf ./tmp
+
+  build:
+    vars:
+      PRJ_NAME: hellojs
+    cmds:
+      - rm -rf ./build
+      - make {{.PRJ_NAME}}.html
+      - chmod +x ./build/compile_{{.PRJ_NAME}}.sh
+      - cd ./build; bash ./compile_{{.PRJ_NAME}}.sh
