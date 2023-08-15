@@ -54,6 +54,6 @@ ENV LIBFRARY_PATH $LD_LIBFRARY_PATH
 RUN sed -i 's/", "/, /g' \
     /opt/emsdk/upstream/emscripten/cache/sysroot/include/emscripten/emscripten.h
 
-RUN apt install -y make neovim
-
 # RUN apt-get install -y emscripten
+
+CMD [ "/bin/bash" ]

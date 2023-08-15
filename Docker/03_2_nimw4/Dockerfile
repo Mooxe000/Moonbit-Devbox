@@ -82,3 +82,5 @@ RUN dpkg -b ./binaryen binaryen-version_${BINARYEN_VERSION}.deb \
 &&  rm -rf ./binaryen
 
 ENV WASI_SDK_PATH /usr/share/wasi-sdk
+
+CMD [ "/bin/bash" ]

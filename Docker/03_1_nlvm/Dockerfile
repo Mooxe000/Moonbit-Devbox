@@ -6,29 +6,38 @@ RUN sed -i \
 &&  apt-get update \
 &&  apt-get upgrade -y
 
-RUN apt-get install -y gcc xz-utils
+RUN apt-get install -y xz-utils
 
 RUN mkdir -p /app
 
 WORKDIR /app
 
-# RUN mkdir -p /app/nim
-# ADD ./nim /app/nim
+# RUN mkdir -p /app/nlvm
+# ADD ./nim /app/nlvm
 
-ENV NIM_VERSION 2.0.1
-# ENV NIM_VERSION 1.6.15
-# https://github.com/nim-lang/nightlies/releases
-# https://download.fastgit.org/nim-lang/nightlies/releases/download/latest-version-1-6/linux_x64.tar.xz
+ENV NLVM_VERSION eed6a08
+# https://github.com/arnetheduck/nlvm/releases
 RUN axel -k \
-    https://download.fastgit.org/nim-lang/nightlies/releases/download/latest-version-2-0/linux_x64.tar.xz \
-&&  tar xvf linux_x64.tar.xz \
-&&  rm -rf linux_x64.tar.xz
+    https://download.fastgit.org/arnetheduck/nlvm/releases/download/continuous/nlvm-${NLVM_VERSION}.tar.xz \
+&&  tar xvf nlvm-${NLVM_VERSION}.tar.xz \
+&&  rm -rf nlvm-${NLVM_VERSION}.tar.xz \
+&&  mv nlvm-${NLVM_VERSION} nlvm \
+&&  mv ./nlvm /opt
 
-RUN cd ./nim-${NIM_VERSION} \
-&&  chmod +x ./install.sh \
-&&  ./install.sh /usr/share \
-&&  ln -s /usr/share/nim/bin/nim /usr/local/bin/nim \
-&&  cd /app \
-&&  rm -rf ./nim-${NIM_VERSION}
+ENV PATH $PATH:/opt/nlvm
 
-RUN apt-get install -y emscripten
+RUN mkdir -p /app/wabt
+
+ENV WABT_VERSION 1.0.33
+# https://github.com/WebAssembly/wabt/releases
+RUN axel -k \
+    https://download.fastgit.org/WebAssembly/wabt/releases/download/${WABT_VERSION}/wabt-${WABT_VERSION}-ubuntu.tar.gz \
+&&  tar -C ./wabt -xvf wabt-${WABT_VERSION}-ubuntu.tar.gz \
+&&  mv ./wabt/wabt-${WABT_VERSION}/* ./wabt \
+&&  rm -rf ./wabt/wabt-${WABT_VERSION} \
+&&  rm -rf wabt-${WABT_VERSION}-ubuntu.tar.gz
+
+RUN mv ./wabt /usr/share
+ENV PATH $PATH:/usr/share/wabt/bin
+
+CMD [ "/bin/bash" ]
