@@ -1,7 +1,7 @@
 version: '3'
 
 vars:
-  container_name: nim
+  container_name: zig
   image_name: mooxe/{{.container_name}}
 
 tasks:
