@@ -1,0 +1,22 @@
+version: '3'
+
+tasks:
+
+  help: task --list-all
+  default:
+    - task: help
+
+  build:
+    - nlvm c
+        --cpu:wasm32
+        --os:standalone
+        --gc:none
+        --passl:--no-entry
+        math.nim
+    - wasm2wat -l myfile.wasm
+
+  # run:
+  #   deps:
+  #     - build
+  #   cmds:
+  #     - deno run -A ./index.js
