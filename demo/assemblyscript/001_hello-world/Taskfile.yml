@@ -1,0 +1,15 @@
+version: '3'
+
+tasks:
+
+  help: task --list-all
+  default:
+    - task: help
+
+  build:
+    - asc fib.ts
+      --outFile fib.wasm
+      --optimize
+
+  run:
+    - deno run -A ./index.js
