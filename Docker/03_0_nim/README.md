@@ -1,0 +1,3 @@
+- https://www.spiria.com/en/blog/web-applications/webassembly-nim/
+  - https://github.com/Feneric/nim-wasm-helpers
+- https://github.com/treeform/nim_emscripten_tutorial
