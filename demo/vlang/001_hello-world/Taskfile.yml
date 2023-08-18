@@ -1,0 +1,13 @@
+version: '3'
+
+tasks:
+
+  help: task --list-all
+  default:
+    - task: help
+
+  build:
+    - v -b wasm -os browser ./hello.v
+
+  run:
+    - deno run -A ./index.js
