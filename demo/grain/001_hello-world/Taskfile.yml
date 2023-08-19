@@ -9,7 +9,13 @@ tasks:
   build:
     - grain compile ./fib.gr
 
-  run:
+  grainrun:
     - grain run fib.gr.wasm
+
+  noderun:
     - node ./index.js
-    # deno run -A ./index.js
+
+  denorun:
+    - deno run -A ./deno.js
+        {}
+        ./fib.gr.wasm
