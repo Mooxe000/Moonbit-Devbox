@@ -1,0 +1,15 @@
+version: '3'
+
+tasks:
+
+  help: task --list-all
+  default:
+    - task: help
+
+  build:
+    - grain compile ./fib.gr
+
+  run:
+    - grain run fib.gr.wasm
+    - node ./index.js
+    # deno run -A ./index.js
