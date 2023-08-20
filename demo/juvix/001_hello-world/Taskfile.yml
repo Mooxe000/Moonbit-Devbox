@@ -1,0 +1,10 @@
+version: '3'
+
+tasks:
+
+  help: task --list-all
+  default:
+    - task: help
+
+  build:
+    - juvix compile -t wasm32-wasi Hello.juvix

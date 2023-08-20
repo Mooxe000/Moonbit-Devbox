@@ -1,0 +1,8 @@
+-- Hello world example. This is a comment.
+module Hello;
+
+-- Import the standard library prelude, including the 'String' type
+open import Stdlib.Prelude;
+
+main : String;
+main := "Hello world!";
