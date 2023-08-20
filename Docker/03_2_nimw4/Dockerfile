@@ -64,6 +64,9 @@ RUN dpkg -b ./wasi-sdk wasi-sdk-${WASI_SDK_VERSION}.deb \
 &&  rm wasi-sdk-${WASI_SDK_VERSION}.deb \
 &&  rm -rf ./wasi-sdk
 
+ENV PATH $PATH:/usr/share/wasi-sdk/bin
+ENV WASI_SYSROOT_PATH /usr/share/wasi-sdk/share/wasi-sysroot
+
 RUN mkdir -p /app/binaryen
 ADD ./binaryen /app/binaryen
 

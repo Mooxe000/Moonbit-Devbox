@@ -40,3 +40,4 @@ ENV PATH $PATH:/usr/share/v/
 # &&  rm -rf ./wasi-sdk
 
 # ENV PATH $PATH:/usr/share/wasi-sdk/bin
+# ENV WASI_SYSROOT_PATH /usr/share/wasi-sdk/share/wasi-sysroot
