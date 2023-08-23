@@ -1,0 +1,14 @@
+version: '3'
+
+tasks:
+
+  help: task --list-all
+  default:
+    - task: help
+
+  new:
+    - dotnet new bolero-app -o MyApp
+
+  buildrun:
+    - cd MyApp
+      ; dotnet run --project src/MyApp.Server

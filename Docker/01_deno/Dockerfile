@@ -12,7 +12,7 @@ RUN mkdir -p /app
 
 WORKDIR /app
 
-ENV DENO_VERSION 1.36.1
+ENV DENO_VERSION 1.36.2
 # https://github.com/denoland/deno/releases
 RUN axel -k \
     https://download.fastgit.org/denoland/deno/releases/download/v${DENO_VERSION}/deno-x86_64-unknown-linux-gnu.zip \
