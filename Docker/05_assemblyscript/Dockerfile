@@ -37,6 +37,7 @@ ENV PATH $PATH:/root/.local/share/fnm/node-versions/v${NODE_VERSION}/installatio
 RUN npm install -g npm@9.8.1
 
 ENV AssemblyScript_VERSION=0.27.9
+# https://github.com/AssemblyScript/assemblyscript
 RUN axel -k \
     http://ghproxy.com/https://github.com/AssemblyScript/assemblyscript/archive/refs/tags/v${AssemblyScript_VERSION}.zip \
 &&  unzip assemblyscript-${AssemblyScript_VERSION}.zip \

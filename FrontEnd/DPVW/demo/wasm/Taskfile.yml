@@ -1,0 +1,12 @@
+version: '3'
+
+tasks:
+
+  help: task --list-all
+  default:
+    - task: help
+
+  build:
+    - asc index.ts
+      --outFile fib.wasm
+      --optimize
