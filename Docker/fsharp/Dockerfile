@@ -19,5 +19,3 @@ RUN axel -k \
 
 RUN apt-get update \
 &&  apt-get install -y dotnet-sdk-7.0
-
-RUN dotnet new install Bolero.Templates
