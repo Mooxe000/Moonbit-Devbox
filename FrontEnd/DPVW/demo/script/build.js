@@ -15,6 +15,8 @@ const fn = pugCompile( pubTmpl, {} )
 
 const html = fn()
 
+await ensureDir('./build/assets')
+
 if (
   await exists('./src/assets'
   , {
@@ -29,7 +31,11 @@ if (
   )
 }
 
-await ensureDir('./build')
+await copy(
+  './wasm/index.wasm'
+, './build/assets/index.wasm'
+)
+
 await Deno.writeTextFile(
   './build/index.html'
 , pretty(html)

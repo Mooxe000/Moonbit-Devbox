@@ -8,3 +8,6 @@ tasks:
 
   build:
     - v -b wasm -os browser ./index.v
+
+  # cp -R assets static
+  # caddy file-server --listen 0.0.0.0:8000

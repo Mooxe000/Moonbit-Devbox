@@ -8,13 +8,24 @@ const env = {
 	}
 }
 
-const res = await WebAssembly.instantiateStreaming(
-	fetch("index.wasm")
-, { env }
-)
+WebAssembly.instantiateStreaming(
+	fetch("/static/index.wasm")
+, {env: env}
+).then( res => {
+	res.instance.exports['memory']
 
-memory = res.instance.exports['memory']
+	console.time('main.main')
+	res.instance.exports['main.main']()
+	console.timeEnd('main.main')
+})
 
-console.time('main.main')
-res.instance.exports['main.main']()
-console.timeEnd('main.main')
+// const res = await WebAssembly.instantiateStreaming(
+// 	await fetch("/static/index.wasm")
+// , { env }
+// )
+
+// memory = res.instance.exports['memory']
+
+// console.time('main.main')
+// res.instance.exports['main.main']()
+// console.timeEnd('main.main')
