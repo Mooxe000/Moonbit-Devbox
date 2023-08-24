@@ -7,6 +7,4 @@ tasks:
     - task: help
 
   build:
-    - asc index.ts
-      --outFile fib.wasm
-      --optimize
+    - v -b wasm -os browser ./index.v
