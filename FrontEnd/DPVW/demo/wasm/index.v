@@ -1,6 +1,7 @@
-fn JS.console_log(s string)
+// fn JS.console_log(s &string)
+// import builtin
+fn JS.console_log(i int)
 
 pub fn main() {
-	JS.console_log('Hello WASI!')
-	// JS.console_log(false)
+  JS.console_log(123)
 }
