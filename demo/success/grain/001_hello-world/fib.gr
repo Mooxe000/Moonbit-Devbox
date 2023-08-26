@@ -1,9 +1,29 @@
 import Number from "number"
-let rec fibonacci = (n : Number) => {
-  if (n == 0 || n == 1) {
-    n
-  } else {
-    fibonacci(n - 1) + fibonacci(n - 2)
-  }
-}
-print(fibonacci(8))
+
+import foreign wasm console_log: (
+  number
+) -> Void from "jsapi"
+
+// let rec fibonacci = (n : Number) => {
+//   if (n == 0 || n == 1) {
+//     n
+//   } else {
+//     fibonacci(n - 1) + fibonacci(n - 2)
+//   }
+// }
+
+console_log(1)
+console_log(2)
+console_log(3)
+console_log(4)
+console_log(5)
+console_log(6)
+console_log("30")
+console_log(30)
+// console_log("Hello WASI!")
+console_log(true)
+console_log(false)
+// console_log('A')
+// console_log('B')
+// console_log('C')
+// print(fibonacci(8))

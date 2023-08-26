@@ -14,6 +14,7 @@ WORKDIR /app
 
 ENV GRAIN_VERSION 0.5.13
 # https://github.com/grain-lang/grain/releases
+# https://download.fastgit.org/grain-lang/grain/releases/download/preview/grain-linux-x64 \
 RUN axel -k \
     https://download.fastgit.org/grain-lang/grain/releases/download/grain-v${GRAIN_VERSION}/grain-linux-x64 \
 &&  mv grain-linux-x64 grain \

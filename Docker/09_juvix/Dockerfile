@@ -10,12 +10,12 @@ RUN mkdir -p /app
 
 WORKDIR /app
 
-ENV JUVIX_VERSION 0.4.2
+ENV JUVIX_VERSION 0.4.3
 # https://github.com/anoma/juvix/releases
 RUN axel -k \
-    https://download.fastgit.org/anoma/juvix/releases/download/v${JUVIX_VERSION}/juvix-linux-x86_64.tar.gz \
-&&  tar xvf juvix-linux-x86_64.tar.gz \
-&&  rm -rf juvix-linux-x86_64.tar.gz \
+    https://download.fastgit.org/anoma/juvix/releases/download/v${JUVIX_VERSION}/juvix-linux_x86_64-v${JUVIX_VERSION}.zip \
+&&  unzip juvix-linux_x86_64-v${JUVIX_VERSION}.zip \
+&&  rm -rf juvix-linux_x86_64-v${JUVIX_VERSION}.zip \
 &&  mv juvix /usr/local/bin
 
 RUN mkdir -p /app/wasi-sdk
