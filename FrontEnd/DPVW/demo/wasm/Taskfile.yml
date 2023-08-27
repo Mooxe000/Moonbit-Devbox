@@ -7,8 +7,11 @@ tasks:
     - task: help
 
   build:
-    - v -b wasm -os browser index.v
-    # - v -b js_browser index.v
+    - zig build-lib
+        index.zig
+        -target wasm32-freestanding
+        -dynamic
+        -rdynamic
 
   # cp -R assets static
   # caddy file-server --listen 0.0.0.0:8000

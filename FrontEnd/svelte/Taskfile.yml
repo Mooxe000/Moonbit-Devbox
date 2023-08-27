@@ -1,7 +1,7 @@
 version: '3'
 
 vars:
-  container_name: zig
+  container_name: vlang
   image_name: mooxe/{{.container_name}}
 
 tasks:
@@ -14,7 +14,6 @@ tasks:
     - podman pull {{.image_name}}
     - podman run -ti --rm
         -v $(pwd):/app
-        -p 8000:8000
         --name {{.container_name}}
         {{.image_name}}
         /bin/bash

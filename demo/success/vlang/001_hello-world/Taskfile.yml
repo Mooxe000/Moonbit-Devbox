@@ -8,6 +8,7 @@ tasks:
 
   build:
     - v -b wasm -os browser ./hello.v
+    # - v -b js_browser index.v
 
   run:
     - deno run -A ./index.js

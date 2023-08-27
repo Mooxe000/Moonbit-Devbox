@@ -51,11 +51,17 @@ tasks:
 
   watch:
     cmds:
+      - mkdir -p /usr/local/var/run/watchman/root-state
       - task: watch-clean
       - task: watch-def
       - task: watch-list
       - task: watch-trigger-def
       - task: watch-trigger-list
+
+  caddy:
+    - cp -R ./build/assets ./build/static
+    - cd ./build
+      ; caddy file-server --listen 0.0.0.0:8000
 
   serve-w:
     deps:
