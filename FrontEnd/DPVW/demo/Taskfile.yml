@@ -17,6 +17,12 @@ tasks:
     deps:
       - clean
     cmds:
+      - cd wasm
+        ; zig build-lib
+            index.zig
+            -target wasm32-freestanding
+            -dynamic
+            -rdynamic
       - deno run -A ./script/build.js
       - deno run -A ./script/bundle.js
       # - mkdir -p ./build/assets
