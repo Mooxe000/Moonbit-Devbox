@@ -1,4 +1,4 @@
-FROM mooxe/deno
+FROM mooxe/debuno
 
 RUN sed -i \
     's/deb.debian.org/mirrors.aliyun.com/g' \
@@ -21,15 +21,6 @@ WORKDIR /app
 # &&  mv ./node /usr/share
 
 # ENV PATH $PATH:/usr/share/node/bin
-
-ENV FNM_VERSION=1.35.1
-# https://github.com/Schniz/fnm/releases
-RUN axel -k \
-    https://download.fastgit.org/Schniz/fnm/releases/download/v${FNM_VERSION}/fnm-linux.zip \
-&&  unzip fnm-linux.zip \
-&&  rm -rf fnm-linux.zip \
-&&  chmod +x fnm \
-&&  mv fnm /usr/local/bin/fnm
 
 ENV NODE_VERSION=18.15.0
 RUN fnm install ${NODE_VERSION}

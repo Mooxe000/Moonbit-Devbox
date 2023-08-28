@@ -40,14 +40,25 @@ RUN axel -k \
 &&  mv ./watchman/bin/* /usr/local/bin \
 &&  rm -rf ./watchman
 
+ENV CADDY_VERSION 2.7.4
 # https://github.com/caddyserver/caddy/releases
 RUN axel -k \
-    https://download.fastgit.org/caddyserver/caddy/releases/download/v2.7.4/caddy_2.7.4_linux_amd64.tar.gz \
-&&  tar xvf caddy_2.7.4_linux_amd64.tar.gz \
+    https://download.fastgit.org/caddyserver/caddy/releases/download/v${CADDY_VERSION}/caddy_${CADDY_VERSION}_linux_amd64.tar.gz \
+&&  tar xvf caddy_${CADDY_VERSION}_linux_amd64.tar.gz \
 &&  mv caddy /usr/local/bin/ \
 &&  rm ./*
 
+ENV LIBSSL_VERSION 1.1_1.1.1n-0+deb11u5
 RUN axel -k \
-    http://security.debian.org/debian-security/pool/updates/main/o/openssl/libssl1.1_1.1.1n-0+deb11u5_amd64.deb \
-&&  dpkg -i libssl1.1_1.1.1n-0+deb11u5_amd64.deb \
-&&  rm libssl1.1_1.1.1n-0+deb11u5_amd64.deb
+    http://security.debian.org/debian-security/pool/updates/main/o/openssl/libssl${LIBSSL_VERSION}_amd64.deb \
+&&  dpkg -i libssl${LIBSSL_VERSION}_amd64.deb \
+&&  rm libssl${LIBSSL_VERSION}_amd64.deb
+
+ENV FNM_VERSION=1.35.1
+# https://github.com/Schniz/fnm/releases
+RUN axel -k \
+    https://download.fastgit.org/Schniz/fnm/releases/download/v${FNM_VERSION}/fnm-linux.zip \
+&&  unzip fnm-linux.zip \
+&&  rm -rf fnm-linux.zip \
+&&  chmod +x fnm \
+&&  mv fnm /usr/local/bin/fnm

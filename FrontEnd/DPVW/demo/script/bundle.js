@@ -3,11 +3,12 @@ import { format } from "npm:prettier"
 import { ensureDir } from "https://deno.land/std/fs/mod.ts"
 
 const result = await bundle(
-  "./src/index.js"
+  "./src/index.ts"
 )
 
 const { code } = result
 
+// console.log({code})
 // console.log(await format(code, {semi: false, parser: "babel"}))
 
 await ensureDir('./build/assets/')
