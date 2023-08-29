@@ -1,0 +1,1 @@
+'https://github.com/mitchellh/zig-js/archive/refs/heads/main.zip'
