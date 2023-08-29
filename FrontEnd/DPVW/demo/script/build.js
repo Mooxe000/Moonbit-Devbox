@@ -32,8 +32,8 @@ if (
 }
 
 await copy(
-  './wasm/index.wasm'
-, './build/assets/index.wasm'
+  './wasm/dist/main.wasm'
+, './build/assets/main.wasm'
 )
 
 await Deno.writeTextFile(

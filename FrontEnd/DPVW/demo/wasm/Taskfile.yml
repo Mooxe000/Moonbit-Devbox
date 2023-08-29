@@ -1,0 +1,36 @@
+version: '3'
+
+tasks:
+
+  help: task --list-all
+  default:
+    - task: help
+
+  install:
+    - rm -rf ./zig_modules
+    - mkdir ./zig_modules ./download_tmps
+    - cd ./download_tmps
+      ; axel -k
+        https://download.fastgit.org/mitchellh/zig-js/archive/refs/heads/main.zip
+      ; unzip zig-js-main.zip
+      ; mv zig-js-main zig-js
+      ; rm -rf zig-js-main.zip
+    - mv ./download_tmps/zig-js ./zig_modules
+    - rm -rf ./download_tmps
+
+  build:
+    - rm -rf ./build ./dist
+    - mkdir ./build ./dist
+    - cp -R ./src/* ./build
+    - cp -R ./zig_modules ./build
+    - cd ./build
+      ; zig build-lib
+          main.zig
+          -target wasm32-freestanding
+          -dynamic
+          -rdynamic
+    - cp ./build/main.wasm ./dist/main.wasm
+
+  buildall:
+    - task: install
+    - task: build

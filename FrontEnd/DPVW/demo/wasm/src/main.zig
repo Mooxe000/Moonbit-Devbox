@@ -1,4 +1,4 @@
-const js = @import("./zig_modules/gh/zig-js/src/main.zig");
+const js = @import("./zig_modules/zig-js/src/main.zig");
 
 export fn set_title() void {
   set_title_() catch unreachable;

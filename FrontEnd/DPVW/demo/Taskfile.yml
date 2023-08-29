@@ -16,11 +16,7 @@ tasks:
 
   buildzig:
     - cd wasm
-      ; zig build-lib
-          index.zig
-          -target wasm32-freestanding
-          -dynamic
-          -rdynamic
+      ; task build
 
   build:
     deps:

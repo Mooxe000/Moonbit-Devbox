@@ -15,7 +15,7 @@ const importObject = {
 
 // const url = new URL('index.wasm', import.meta.url);
 // fetch(url.href).then(response =>
-const res = await fetch('/static/index.wasm')
+const res = await fetch('/static/main.wasm')
 const bytes = await res.arrayBuffer()
 const results = await WebAssembly.instantiate(bytes, importObject)
 
