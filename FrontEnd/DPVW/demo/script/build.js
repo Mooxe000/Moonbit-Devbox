@@ -1,5 +1,5 @@
-import { compile as pugCompile } from 'https://esm.sh/pug'
-import pretty from 'https://esm.sh/pretty'
+import { compile as pugCompile } from 'https://esm.sh/pug@3.0.2'
+import pretty from 'https://esm.sh/pretty@2.0.0'
 import {
   ensureDir
 , exists
