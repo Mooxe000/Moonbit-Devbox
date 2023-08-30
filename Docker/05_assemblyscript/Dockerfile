@@ -13,7 +13,7 @@ RUN mkdir -p /app
 WORKDIR /app
 
 # ENV NODE_VERSION=18.15.0
-# RUN curl -O \
+# RUN axel -k \
 #     https://nodejs.org/download/release/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.xz \
 # &&  tar xvf node-v${NODE_VERSION}-linux-x64.tar.xz \
 # &&  rm -rf node-v${NODE_VERSION}-linux-x64.tar.xz \
@@ -37,8 +37,10 @@ RUN axel -k \
 &&  mv assemblyscript /usr/share
 
 RUN cd /usr/share/assemblyscript \
-&&  npm install \
-&&  npm run build \
-&&  npm link
+&&  bun install \
+&&  bun run build \
+&&  bun link
+
+ENV PATH $PATH:~/.bun/bin
 
 CMD [ "asc" ]
