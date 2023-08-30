@@ -11,7 +11,10 @@ const result = await WebAssembly.instantiate(
     wasmBytes
   , {
       env: {
-        __writeln: (ptr, len) => {
+        console_log: (ptr, len) => {
+          console.log(get_string(ptr, len))
+        }
+      , __writeln: (ptr, len) => {
           console.log(get_string(ptr, len))
         }
       , __panic_abort: (ptr, len) => {
