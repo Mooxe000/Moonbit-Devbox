@@ -27,6 +27,6 @@ RUN mv ./wabt /usr/share
 ENV PATH $PATH:/usr/share/wabt/bin
 
 RUN /bin/bash -c \
-    "$(curl -fsSL https://www.moonbitlang.com/release/ubuntu_x86_64_moon_setup.sh)"
+    "$(curl -fsSL https://cli.moonbitlang.com/ubuntu_x86_64_moon_setup.sh)"
 
 CMD [ "/bin/bash" ]

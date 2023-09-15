@@ -12,7 +12,7 @@ RUN mkdir -p /app
 
 WORKDIR /app
 
-ENV TASK_VERSION 3.29.1
+ENV TASK_VERSION 3.30.1
 # https://github.com/go-task/task/releases
 RUN axel -k \
     https://download.fastgit.org/go-task/task/releases/download/v${TASK_VERSION}/task_linux_amd64.tar.gz \
