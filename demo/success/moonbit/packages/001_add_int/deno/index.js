@@ -11,5 +11,7 @@ const spectest = {
 const wasmModule = new WebAssembly.Module(wasmBytes)
 const wasmInstance = await WebAssembly.instantiate(wasmModule, spectest)
 
-const add = wasmInstance.exports['001_add_int/main::add']
-console.log(add(2, 3))
+console.log(wasmInstance.exports)
+
+// const add = wasmInstance.exports['001_add_int/main::add']
+// console.log(add(2, 3))

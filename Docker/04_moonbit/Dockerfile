@@ -1,4 +1,4 @@
-FROM mooxe/deno
+FROM mooxe/debuno
 
 RUN sed -i \
     's/deb.debian.org/mirrors.aliyun.com/g' \

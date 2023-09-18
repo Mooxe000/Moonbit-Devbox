@@ -20,7 +20,7 @@ RUN axel -k \
 &&  rm deno-x86_64-unknown-linux-gnu.zip \
 &&  mv ./deno /usr/local/bin
 
-ENV BUN_VERSION 1.0.1
+ENV BUN_VERSION 1.0.2
 # https://github.com/oven-sh/bun/releases
 RUN axel -k \
     https://download.fastgit.org/oven-sh/bun/releases/download/bun-v${BUN_VERSION}/bun-linux-x64.zip \
