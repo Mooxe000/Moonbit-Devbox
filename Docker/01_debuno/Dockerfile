@@ -12,7 +12,7 @@ RUN mkdir -p /app
 
 WORKDIR /app
 
-ENV DENO_VERSION 1.37.1
+ENV DENO_VERSION 1.37.2
 # https://github.com/denoland/deno/releases
 RUN axel -k \
     https://download.fastgit.org/denoland/deno/releases/download/v${DENO_VERSION}/deno-x86_64-unknown-linux-gnu.zip \
@@ -20,7 +20,7 @@ RUN axel -k \
 &&  rm deno-x86_64-unknown-linux-gnu.zip \
 &&  mv ./deno /usr/local/bin
 
-ENV BUN_VERSION 1.0.4
+ENV BUN_VERSION 1.0.6
 # https://github.com/oven-sh/bun/releases
 RUN axel -k \
     https://download.fastgit.org/oven-sh/bun/releases/download/bun-v${BUN_VERSION}/bun-linux-x64.zip \
@@ -29,7 +29,7 @@ RUN axel -k \
 &&  mv ./bun-linux-x64/bun /usr/local/bin/ \
 &&  rmdir bun-linux-x64
 
-ENV WATCHMAN_VERSION 2023.09.18.00
+ENV WATCHMAN_VERSION 2023.10.09.00
 # https://github.com/facebook/watchman/releases
 RUN axel -k \
     https://download.fastgit.org/facebook/watchman/releases/download/v${WATCHMAN_VERSION}/watchman-v${WATCHMAN_VERSION}-linux.zip \
@@ -40,7 +40,7 @@ RUN axel -k \
 &&  mv ./watchman/bin/* /usr/local/bin \
 &&  rm -rf ./watchman
 
-ENV CADDY_VERSION 2.7.4
+ENV CADDY_VERSION 2.7.5
 # https://github.com/caddyserver/caddy/releases
 RUN axel -k \
     https://download.fastgit.org/caddyserver/caddy/releases/download/v${CADDY_VERSION}/caddy_${CADDY_VERSION}_linux_amd64.tar.gz \
