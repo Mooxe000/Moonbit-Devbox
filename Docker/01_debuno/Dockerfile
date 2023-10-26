@@ -20,7 +20,7 @@ RUN axel -k \
 &&  rm deno-x86_64-unknown-linux-gnu.zip \
 &&  mv ./deno /usr/local/bin
 
-ENV BUN_VERSION 1.0.6
+ENV BUN_VERSION 1.0.7
 # https://github.com/oven-sh/bun/releases
 RUN axel -k \
     https://download.fastgit.org/oven-sh/bun/releases/download/bun-v${BUN_VERSION}/bun-linux-x64.zip \
@@ -29,7 +29,7 @@ RUN axel -k \
 &&  mv ./bun-linux-x64/bun /usr/local/bin/ \
 &&  rmdir bun-linux-x64
 
-ENV WATCHMAN_VERSION 2023.10.09.00
+ENV WATCHMAN_VERSION 2023.10.23.00
 # https://github.com/facebook/watchman/releases
 RUN axel -k \
     https://download.fastgit.org/facebook/watchman/releases/download/v${WATCHMAN_VERSION}/watchman-v${WATCHMAN_VERSION}-linux.zip \
