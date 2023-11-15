@@ -14,7 +14,7 @@ WORKDIR /app
 
 RUN mkdir -p /app/wabt
 
-ENV WABT_VERSION 1.0.33
+ENV WABT_VERSION 1.0.34
 # https://github.com/WebAssembly/wabt/releases
 RUN axel -k \
     https://download.fastgit.org/WebAssembly/wabt/releases/download/${WABT_VERSION}/wabt-${WABT_VERSION}-ubuntu.tar.gz \
