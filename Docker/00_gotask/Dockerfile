@@ -12,10 +12,10 @@ RUN mkdir -p /app
 
 WORKDIR /app
 
-ENV TASK_VERSION 3.31.0
+ENV TASK_VERSION 3.35.1
 # https://github.com/go-task/task/releases
 RUN axel -k \
-    https://download.fastgit.org/go-task/task/releases/download/v${TASK_VERSION}/task_linux_amd64.tar.gz \
+    https://mirror.ghproxy.com/https://github.com/go-task/task/releases/download/v${TASK_VERSION}/task_linux_amd64.tar.gz \
 &&  mkdir ./task \
 &&  tar -C ./task -xvf task_linux_amd64.tar.gz
 
