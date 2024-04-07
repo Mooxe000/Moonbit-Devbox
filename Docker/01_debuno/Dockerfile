@@ -12,18 +12,20 @@ RUN mkdir -p /app
 
 WORKDIR /app
 
-ENV DENO_VERSION 1.42.0
+ARG PROXY_PREFIX=https://mirror.ghproxy.com/
+
+ENV DENO_VERSION 1.42.1
 # https://github.com/denoland/deno/releases
 RUN axel -k \
-    https://mirror.ghproxy.com/https://github.com/denoland/deno/releases/download/v${DENO_VERSION}/deno-x86_64-unknown-linux-gnu.zip \
+    ${PROXY_PREFIX}https://github.com/denoland/deno/releases/download/v${DENO_VERSION}/deno-x86_64-unknown-linux-gnu.zip \
 &&  unzip deno-x86_64-unknown-linux-gnu.zip \
 &&  rm deno-x86_64-unknown-linux-gnu.zip \
 &&  mv ./deno /usr/local/bin
 
-ENV BUN_VERSION 1.0.36
+ENV BUN_VERSION 1.1.2
 # https://github.com/oven-sh/bun/releases
 RUN axel -k \
-    https://mirror.ghproxy.com/https://github.com/oven-sh/bun/releases/download/bun-v${BUN_VERSION}/bun-linux-x64.zip \
+    ${PROXY_PREFIX}https://github.com/oven-sh/bun/releases/download/bun-v${BUN_VERSION}/bun-linux-x64.zip \
 &&  unzip bun-linux-x64.zip \
 &&  rm bun-linux-x64.zip \
 &&  mv ./bun-linux-x64/bun /usr/local/bin/ \
@@ -38,9 +40,10 @@ RUN axel -k \
 # &&  apt show watchexec
 
 ENV WE_VERSION 1.25.1
+# https://github.com/watchexec/watchexec/releases
 RUN apt install -y xz-utils
 RUN axel -k \
-    https://mirror.ghproxy.com/https://github.com/watchexec/watchexec/releases/download/v${WE_VERSION}/watchexec-${WE_VERSION}-x86_64-unknown-linux-musl.tar.xz \
+    ${PROXY_PREFIX}https://github.com/watchexec/watchexec/releases/download/v${WE_VERSION}/watchexec-${WE_VERSION}-x86_64-unknown-linux-musl.tar.xz \
 &&  tar xvf watchexec-${WE_VERSION}-x86_64-unknown-linux-musl.tar.xz \
 &&  cp ./watchexec-${WE_VERSION}-x86_64-unknown-linux-musl/watchexec /usr/local/bin/watchexec \
 &&  rm -rf ./watchexec-${WE_VERSION}-x86_64-unknown-linux-musl*
@@ -57,10 +60,10 @@ RUN axel -k \
 # &&  rm -rf ./watchman
 
 # static-web-server
-# https://github.com/static-web-server/static-web-server
 ENV SWS_VERSION 2.28.0
+# https://github.com/static-web-server/static-web-server/releases
 RUN axel -k \
-    https://mirror.ghproxy.com/https://github.com/static-web-server/static-web-server/releases/download/v${SWS_VERSION}/static-web-server-v${SWS_VERSION}-x86_64-unknown-linux-musl.tar.gz \
+    ${PROXY_PREFIX}https://github.com/static-web-server/static-web-server/releases/download/v${SWS_VERSION}/static-web-server-v${SWS_VERSION}-x86_64-unknown-linux-musl.tar.gz \
 &&  tar xvf static-web-server-v${SWS_VERSION}-x86_64-unknown-linux-musl.tar.gz \
 &&  cp ./static-web-server-v${SWS_VERSION}-x86_64-unknown-linux-musl/static-web-server /usr/local/bin/sws \
 &&  rm -rf ./static-web-server-v${SWS_VERSION}-x86_64-unknown-linux-musl*
@@ -82,7 +85,7 @@ RUN axel -k \
 ENV FNM_VERSION=1.35.1
 # https://github.com/Schniz/fnm/releases
 RUN axel -k \
-    https://mirror.ghproxy.com/https://github.com/Schniz/fnm/releases/download/v${FNM_VERSION}/fnm-linux.zip \
+    ${PROXY_PREFIX}https://github.com/Schniz/fnm/releases/download/v${FNM_VERSION}/fnm-linux.zip \
 &&  unzip fnm-linux.zip \
 &&  rm -rf fnm-linux.zip \
 &&  chmod +x fnm \

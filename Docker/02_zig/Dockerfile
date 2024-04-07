@@ -12,20 +12,22 @@ RUN mkdir -p /app
 
 WORKDIR /app
 
-ENV ZIG_VERSION 0.12.0
+ARG PROXY_PREFIX=https://mirror.ghproxy.com/
+
+ENV ZIG_VERSION 0.12.0-dev.3541+05b185811
 # https://github.com/ziglang/zig/releases
 RUN axel -k \
-    https://ziglang.org/builds/zig-linux-x86_64-${ZIG_VERSION}-dev.89+913511557.tar.xz \
-&&  tar xvf zig-linux-x86_64-${ZIG_VERSION}-dev.89+913511557.tar.xz \
-&&  rm -rf zig-linux-x86_64-${ZIG_VERSION}-dev.89+913511557.tar.xz \
-&&  mv zig-linux-x86_64-${ZIG_VERSION}-dev.89+913511557 zig \
+    https://ziglang.org/builds/zig-linux-x86_64-${ZIG_VERSION}.tar.xz \
+&&  tar xvf zig-linux-x86_64-${ZIG_VERSION}.tar.xz \
+&&  rm -rf zig-linux-x86_64-${ZIG_VERSION}.tar.xz \
+&&  mv zig-linux-x86_64-${ZIG_VERSION} zig \
 &&  mv ./zig /opt
 
 ENV PATH $PATH:/opt/zig
 
 RUN mkdir -p /app/wabt
 
-ENV WABT_VERSION 1.0.33
+ENV WABT_VERSION 1.0.34
 # https://github.com/WebAssembly/wabt/releases
 RUN axel -k \
     https://download.fastgit.org/WebAssembly/wabt/releases/download/${WABT_VERSION}/wabt-${WABT_VERSION}-ubuntu.tar.gz \
