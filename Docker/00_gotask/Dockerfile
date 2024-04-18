@@ -14,7 +14,7 @@ WORKDIR /app
 
 ARG PROXY_PREFIX=https://mirror.ghproxy.com/
 
-ENV TASK_VERSION 3.35.1
+ENV TASK_VERSION 3.36.0
 # https://github.com/go-task/task/releases
 RUN axel -k \
     ${PROXY_PREFIX}https://github.com/go-task/task/releases/download/v${TASK_VERSION}/task_linux_amd64.tar.gz \

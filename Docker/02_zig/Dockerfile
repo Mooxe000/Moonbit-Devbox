@@ -14,7 +14,7 @@ WORKDIR /app
 
 ARG PROXY_PREFIX=https://mirror.ghproxy.com/
 
-ENV ZIG_VERSION 0.12.0-dev.3541+05b185811
+ENV ZIG_VERSION 0.12.0-dev.3667+77abd3a96
 # https://github.com/ziglang/zig/releases
 RUN axel -k \
     https://ziglang.org/builds/zig-linux-x86_64-${ZIG_VERSION}.tar.xz \

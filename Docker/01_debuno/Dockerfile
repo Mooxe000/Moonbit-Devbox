@@ -14,7 +14,7 @@ WORKDIR /app
 
 ARG PROXY_PREFIX=https://mirror.ghproxy.com/
 
-ENV DENO_VERSION 1.42.1
+ENV DENO_VERSION 1.42.4
 # https://github.com/denoland/deno/releases
 RUN axel -k \
     ${PROXY_PREFIX}https://github.com/denoland/deno/releases/download/v${DENO_VERSION}/deno-x86_64-unknown-linux-gnu.zip \
@@ -22,7 +22,7 @@ RUN axel -k \
 &&  rm deno-x86_64-unknown-linux-gnu.zip \
 &&  mv ./deno /usr/local/bin
 
-ENV BUN_VERSION 1.1.2
+ENV BUN_VERSION 1.1.4
 # https://github.com/oven-sh/bun/releases
 RUN axel -k \
     ${PROXY_PREFIX}https://github.com/oven-sh/bun/releases/download/bun-v${BUN_VERSION}/bun-linux-x64.zip \
