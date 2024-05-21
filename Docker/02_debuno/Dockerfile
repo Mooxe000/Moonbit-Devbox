@@ -44,6 +44,7 @@ RUN export http_proxy=${container_proxy} \
 # &&  apt update \
 # &&  apt show watchexec
 
+# https://github.com/eradman/entr
 ARG WE_RELEASE_URL=https://github.com/watchexec/watchexec/releases
 ARG WE_VERSION=2.1.0
 RUN export http_proxy=${container_proxy} \
