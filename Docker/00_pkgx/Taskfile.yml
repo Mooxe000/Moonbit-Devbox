@@ -1,7 +1,7 @@
 version: '3'
 
 vars:
-  container_name: debuno
+  container_name: pkgx
   image_name: mooxe/{{.container_name}}
 
 tasks:
@@ -11,15 +11,21 @@ tasks:
     - task: help
 
   build:
-    - docker system prune
-    - docker build -t {{.image_name}} .
-
+    - docker build
+        --build-arg container_proxy=$container_proxy
+        -t {{.image_name}} .
   push: docker push {{.image_name}}
-  run:
+  run_proxy:
     - docker run -ti --rm
+        -e http_proxy=$container_proxy
+        -e https_proxy=$container_proxy
         --name {{.container_name}}
         {{.image_name}}
-        /bin/bash
+  run:
+    - docker run -ti --rm
+        -e container_proxy=$container_proxy
+        --name {{.container_name}}
+        {{.image_name}}
 
   rund:
     - docker run -d

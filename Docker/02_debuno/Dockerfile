@@ -1,28 +1,24 @@
 FROM mooxe/gotask
 
-# RUN sed -i \
-#     's/deb.debian.org/mirrors.aliyun.com/g' \
-#     /etc/apt/sources.list.d/debian.sources \
-# &&  apt-get update \
-# &&  apt-get upgrade -y
+RUN sed -i \
+    's/deb.debian.org/mirrors.aliyun.com/g' \
+    /etc/apt/sources.list.d/debian.sources \
+&&  apt-get update \
+&&  apt-get upgrade -y
 
-RUN apk -U upgrade
-
-# RUN apt-get install -y unzip
-
-RUN apk add --no-cache bash unzip
+RUN apt-get install -y unzip xz-utils
 
 RUN mkdir -p /app
 
 WORKDIR /app
 
-# ARG PROXY_PREFIX=https://mirror.ghproxy.com/
+ARG container_proxy
 
 ARG DENO_RELEASE_URL=https://github.com/denoland/deno/releases
 ARG DENO_VERSION=1.43.5
 
-RUN echo \
-    ${DENO_RELEASE_URL}/download/v${DENO_VERSION}/deno-x86_64-unknown-linux-gnu.zip \
+RUN export http_proxy=${container_proxy} \
+&&  export https_proxy=${container_proxy} \
 &&  aria2c \
     ${DENO_RELEASE_URL}/download/v${DENO_VERSION}/deno-x86_64-unknown-linux-gnu.zip \
 &&  unzip deno-x86_64-unknown-linux-gnu.zip \
@@ -31,7 +27,9 @@ RUN echo \
 
 ARG BUN_RELEASE_URL=https://github.com/oven-sh/bun/releases
 ARG BUN_VERSION=1.1.8
-RUN aria2c \
+RUN export http_proxy=${container_proxy} \
+&&  export https_proxy=${container_proxy} \
+&&  aria2c \
     ${BUN_RELEASE_URL}/download/bun-v${BUN_VERSION}/bun-linux-x64.zip \
 &&  unzip bun-linux-x64.zip \
 &&  rm bun-linux-x64.zip \
@@ -48,9 +46,8 @@ RUN aria2c \
 
 ARG WE_RELEASE_URL=https://github.com/watchexec/watchexec/releases
 ARG WE_VERSION=2.1.0
-RUN apk add --no-cache xz
-RUN echo \
-    ${WE_RELEASE_URL}/download/v${WE_VERSION}/watchexec-${WE_VERSION}-x86_64-unknown-linux-musl.tar.xz \
+RUN export http_proxy=${container_proxy} \
+&&  export https_proxy=${container_proxy} \
 &&  aria2c \
     ${WE_RELEASE_URL}/download/v${WE_VERSION}/watchexec-${WE_VERSION}-x86_64-unknown-linux-musl.tar.xz \
 &&  tar xvf watchexec-${WE_VERSION}-x86_64-unknown-linux-musl.tar.xz \
@@ -71,8 +68,8 @@ RUN echo \
 # miniserve
 ARG MINISERVE_RELEASE_URL=https://github.com/svenstaro/miniserve/releases
 ARG MINISERVE_VERSION=0.27.0
-RUN echo \
-    ${MINISERVE_RELEASE_URL}/download/v${MINISERVE_VERSION}/miniserve-${MINISERVE_VERSION}-x86_64-unknown-linux-gnu \
+RUN export http_proxy=${container_proxy} \
+&&  export https_proxy=${container_proxy} \
 &&  aria2c \
     ${MINISERVE_RELEASE_URL}/download/v${MINISERVE_VERSION}/miniserve-${MINISERVE_VERSION}-x86_64-unknown-linux-gnu \
 &&  chmod +x ./miniserve-${MINISERVE_VERSION}-x86_64-unknown-linux-gnu \
@@ -103,8 +100,8 @@ RUN echo \
 
 ARG FNM_RELEASE_URL=https://github.com/Schniz/fnm/releases
 ARG FNM_VERSION=1.35.1
-RUN echo \
-    ${FNM_RELEASE_URL}/download/v${FNM_VERSION}/fnm-linux.zip \
+RUN export http_proxy=${container_proxy} \
+&&  export https_proxy=${container_proxy} \
 &&  aria2c \
     ${FNM_RELEASE_URL}/download/v${FNM_VERSION}/fnm-linux.zip \
 &&  unzip fnm-linux.zip \

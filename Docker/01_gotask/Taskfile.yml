@@ -10,10 +10,20 @@ tasks:
   default:
     - task: help
 
-  build: docker build -t {{.image_name}} .
+  build:
+    - docker build
+        --build-arg container_proxy=$container_proxy
+        -t {{.image_name}} .
   push: docker push {{.image_name}}
+  run_proxy:
+    - docker run -ti --rm
+        -e http_proxy=$container_proxy
+        -e https_proxy=$container_proxy
+        --name {{.container_name}}
+        {{.image_name}}
   run:
     - docker run -ti --rm
+        -e container_proxy=$container_proxy
         --name {{.container_name}}
         {{.image_name}}
 

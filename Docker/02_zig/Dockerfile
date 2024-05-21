@@ -6,17 +6,19 @@ RUN sed -i \
 &&  apt-get update \
 &&  apt-get upgrade -y
 
-RUN apt-get install -y xz-utils
-
 RUN mkdir -p /app
 
 WORKDIR /app
 
-ARG PROXY_PREFIX=https://mirror.ghproxy.com/
+ARG container_proxy
 
-ENV ZIG_VERSION 0.12.0-dev.3667+77abd3a96
-# https://github.com/ziglang/zig/releases
-RUN axel -k \
+ARG ZIG_RELEASE_URL=https://github.com/ziglang/zig/releases
+ARG ZIG_VERSION=0.13.0-dev.217+ad7217229
+# https://ziglang.org/builds/zig-linux-x86_64-${ZIG_VERSION}.tar.xz \
+# ARG ZIG_VERSION=0.12.0
+RUN export http_proxy=${container_proxy} \
+&&  export https_proxy=${container_proxy} \
+&&  aria2c \
     https://ziglang.org/builds/zig-linux-x86_64-${ZIG_VERSION}.tar.xz \
 &&  tar xvf zig-linux-x86_64-${ZIG_VERSION}.tar.xz \
 &&  rm -rf zig-linux-x86_64-${ZIG_VERSION}.tar.xz \
@@ -27,14 +29,16 @@ ENV PATH $PATH:/opt/zig
 
 RUN mkdir -p /app/wabt
 
-ENV WABT_VERSION 1.0.34
-# https://github.com/WebAssembly/wabt/releases
-RUN axel -k \
-    ${PROXY_PREFIX}https://github.com/WebAssembly/wabt/releases/download/${WABT_VERSION}/wabt-${WABT_VERSION}-ubuntu.tar.gz \
-&&  tar -C ./wabt -xvf wabt-${WABT_VERSION}-ubuntu.tar.gz \
+ARG WABT_RELEASE_URL=https://github.com/WebAssembly/wabt/releases
+ARG WABT_VERSION=1.0.35
+RUN export http_proxy=${container_proxy} \
+&&  export https_proxy=${container_proxy} \
+&&  aria2c \
+    ${WABT_RELEASE_URL}/download/${WABT_VERSION}/wabt-${WABT_VERSION}-ubuntu-20.04.tar.gz \
+&&  tar -C ./wabt -xvf wabt-${WABT_VERSION}-ubuntu-20.04.tar.gz \
 &&  mv ./wabt/wabt-${WABT_VERSION}/* ./wabt \
 &&  rm -rf ./wabt/wabt-${WABT_VERSION} \
-&&  rm -rf wabt-${WABT_VERSION}-ubuntu.tar.gz
+&&  rm -rf wabt-${WABT_VERSION}-ubuntu-20.04.tar.gz
 
 RUN mv ./wabt /usr/share
 ENV PATH $PATH:/usr/share/wabt/bin
