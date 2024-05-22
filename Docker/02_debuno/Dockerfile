@@ -1,3 +1,14 @@
+FROM gcc
+
+WORKDIR /root
+
+# https://github.com/eradman/entr
+RUN curl -O https://eradman.com/entrproject/code/entr-5.5.tar.gz \
+&&  tar -xzf entr-5.5.tar.gz \
+&&  cd entr-5.5 \
+&&  ./configure \
+&&  make test
+
 FROM mooxe/gotask
 
 RUN sed -i \
@@ -16,7 +27,6 @@ ARG container_proxy
 
 ARG DENO_RELEASE_URL=https://github.com/denoland/deno/releases
 ARG DENO_VERSION=1.43.5
-
 RUN export http_proxy=${container_proxy} \
 &&  export https_proxy=${container_proxy} \
 &&  aria2c \
@@ -44,7 +54,8 @@ RUN export http_proxy=${container_proxy} \
 # &&  apt update \
 # &&  apt show watchexec
 
-# https://github.com/eradman/entr
+COPY --from=0 /root/entr-5.5/entr /usr/local/bin/entr
+
 ARG WE_RELEASE_URL=https://github.com/watchexec/watchexec/releases
 ARG WE_VERSION=2.1.0
 RUN export http_proxy=${container_proxy} \
