@@ -1,0 +1,45 @@
+version: '3'
+
+tasks:
+
+  help: task --list-all
+  default:
+    - task: help
+
+  env:
+    - fnm install v21
+    - eval $(fnm env --shell bash)
+      ; npm i -g npm
+      ; npm i -g nnrm corepack
+      ; nnrm use taobao
+      ; corepack enable
+      ; corepack install -g pnpm
+    - echo 'eval $(fnm env --shell bash)'
+
+  generate_client:
+    - eval $(fnm env --shell bash)
+      ; cd schema
+      ; npx teo generate client
+    - eval $(fnm env --shell bash)
+      ; cd hello-teo-client
+      ; npm i
+    - cp src/hello.ts ./hello-teo-client/hello.ts
+
+  clean_client:
+    - rm -rf hello-teo-client
+
+  backend_serve:
+    - eval $(fnm env --shell bash)
+      ; cd schema
+      ; npx teo serve
+
+  frontend_serve:
+    - eval $(fnm env --shell bash)
+      ; cd hello-teo-client
+      ; node --loader ts-node/esm hello.ts
+
+  serve:
+    deps:
+      - backend_serve
+    cmds:
+      - frontend_serve

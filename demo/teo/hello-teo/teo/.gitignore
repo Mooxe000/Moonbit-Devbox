@@ -1,0 +1,8 @@
+node_modules
+
+.pnpm-store
+
+*-lock.*
+*.sqlite
+
+/hello-teo-client
