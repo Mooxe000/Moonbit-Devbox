@@ -14,6 +14,11 @@ tasks:
     - docker build
         --build-arg container_proxy=$container_proxy
         -t {{.image_name}} .
+  rebuild:
+    - docker build
+        --no-cache
+        --build-arg container_proxy=$container_proxy
+        -t {{.image_name}} .
   push: docker push {{.image_name}}
   run_proxy:
     - docker run -ti --rm

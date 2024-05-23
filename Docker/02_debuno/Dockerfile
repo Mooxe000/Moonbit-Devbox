@@ -26,7 +26,7 @@ WORKDIR /app
 ARG container_proxy
 
 ARG DENO_RELEASE_URL=https://github.com/denoland/deno/releases
-ARG DENO_VERSION=1.43.5
+ARG DENO_VERSION=1.43.6
 RUN export http_proxy=${container_proxy} \
 &&  export https_proxy=${container_proxy} \
 &&  aria2c \
