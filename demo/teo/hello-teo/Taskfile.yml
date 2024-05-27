@@ -8,6 +8,9 @@ tasks:
 
   env:
     - fnm install v21
+    # --corepack-enabled
+    # corepack
+    # ; corepack enable
     - eval $(fnm env --shell bash)
       ; npm i -g npm
       ; npm i -g nnrm corepack
@@ -15,31 +18,46 @@ tasks:
       ; corepack enable
       ; corepack install -g pnpm
     - echo 'eval $(fnm env --shell bash)'
+    - eval $(fnm env --shell bash)
+      ; cd teo
+      ; rm -rf node_modules
+      ; pnpm i @teocloud/teo
+      ; pnpm i -D ts-node
 
   generate_client:
     - eval $(fnm env --shell bash)
-      ; cd schema
+      ; cd teo/schema
       ; npx teo generate client
+
+  init_client:
     - eval $(fnm env --shell bash)
-      ; cd hello-teo-client
+      ; cd teo/hello-teo-client
       ; npm i
-    - cp src/hello.ts ./hello-teo-client/hello.ts
 
   clean_client:
-    - rm -rf hello-teo-client
+    - rm -rf teo/hello-teo-client
+
+  client:
+    deps:
+      - clean_client
+    cmds:
+      - task: generate_client
+      - task: init_client
 
   backend_serve:
     - eval $(fnm env --shell bash)
-      ; cd schema
+      ; cd teo/schema
       ; npx teo serve
-
-  frontend_serve:
-    - eval $(fnm env --shell bash)
-      ; cd hello-teo-client
-      ; node --loader ts-node/esm hello.ts
 
   serve:
     deps:
-      - backend_serve
+      - client
     cmds:
-      - frontend_serve
+      - backend_serve
+
+  run:
+    - cp teo/src/hello.ts teo/hello-teo-client/hello.ts
+    - rm -rf teo/schema/helloteo.sqlite
+    - eval $(fnm env --shell bash)
+      ; cd teo/hello-teo-client
+      ; node --trace-warnings --loader ts-node/esm hello.ts

@@ -1,8 +1,0 @@
-{
-	"dependencies": {
-		"@teocloud/teo": "^0.2.34"
-	},
-	"devDependencies": {
-		"ts-node": "^10.9.2"
-	}
-}

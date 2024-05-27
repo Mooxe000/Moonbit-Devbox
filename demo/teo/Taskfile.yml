@@ -11,9 +11,12 @@ tasks:
     - task: help
 
   dev:
-    - podman pull {{.image_name}}
-    - podman run -ti --rm
+    # - podman pull {{.image_name}}
+    # - podman run -ti --rm
+    - docker pull {{.image_name}}
+    - docker run -ti --rm
         -v $(pwd):/app
+        -e container_proxy=$container_proxy
         -p 8080:8080
         --name {{.container_name}}
         {{.image_name}}
