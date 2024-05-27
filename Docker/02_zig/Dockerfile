@@ -13,7 +13,7 @@ WORKDIR /app
 ARG container_proxy
 
 ARG ZIG_RELEASE_URL=https://github.com/ziglang/zig/releases
-ARG ZIG_VERSION=0.13.0-dev.217+ad7217229
+ARG ZIG_VERSION=0.13.0-dev.267+793f820b3
 # https://ziglang.org/builds/zig-linux-x86_64-${ZIG_VERSION}.tar.xz \
 # ARG ZIG_VERSION=0.12.0
 RUN export http_proxy=${container_proxy} \

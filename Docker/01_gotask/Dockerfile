@@ -15,7 +15,7 @@ RUN apt install -y aria2
 ARG container_proxy
 
 ARG RELEASE_URL=https://github.com/go-task/task/releases
-ARG TASK_VERSION=3.37.1
+ARG TASK_VERSION=3.37.2
 RUN export http_proxy=${container_proxy} \
 &&  export https_proxy=${container_proxy} \
 &&  aria2c \

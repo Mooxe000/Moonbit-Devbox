@@ -36,7 +36,7 @@ RUN export http_proxy=${container_proxy} \
 &&  mv ./deno /usr/local/bin
 
 ARG BUN_RELEASE_URL=https://github.com/oven-sh/bun/releases
-ARG BUN_VERSION=1.1.8
+ARG BUN_VERSION=1.1.9
 RUN export http_proxy=${container_proxy} \
 &&  export https_proxy=${container_proxy} \
 &&  aria2c \
