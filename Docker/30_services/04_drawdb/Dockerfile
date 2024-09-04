@@ -6,27 +6,13 @@ RUN sed -i \
 &&  apt-get update \
 &&  apt-get upgrade -y
 
+RUN apt-get install -y curl
+
 RUN mkdir -p /app
 
 WORKDIR /app
 
 ARG container_proxy
-
-ARG ZIG_RELEASE_URL=https://github.com/ziglang/zig/releases
-ARG ZIG_VERSION=0.14.0-dev.23+d9bd34fd0
-# ARG ZIG_VERSION=0.12.0
-# https://ziglang.org/download/
-# https://ziglang.org/builds/zig-linux-x86_64-${ZIG_VERSION}.tar.xz \
-RUN export http_proxy=${container_proxy} \
-&&  export https_proxy=${container_proxy} \
-&&  aria2c \
-    https://ziglang.org/builds/zig-linux-x86_64-${ZIG_VERSION}.tar.xz \
-&&  tar xvf zig-linux-x86_64-${ZIG_VERSION}.tar.xz \
-&&  rm -rf zig-linux-x86_64-${ZIG_VERSION}.tar.xz \
-&&  mv zig-linux-x86_64-${ZIG_VERSION} zig \
-&&  mv ./zig /opt
-
-ENV PATH $PATH:/opt/zig
 
 RUN mkdir -p /app/wabt
 
@@ -43,3 +29,8 @@ RUN export http_proxy=${container_proxy} \
 
 RUN mv ./wabt /usr/share
 ENV PATH $PATH:/usr/share/wabt/bin
+
+RUN /bin/bash -c \
+    "$(curl -fsSL https://cli.moonbitlang.com/ubuntu_x86_64_moon_setup.sh)"
+
+CMD [ "/bin/bash" ]

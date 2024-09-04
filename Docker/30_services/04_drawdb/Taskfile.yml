@@ -1,0 +1,41 @@
+version: '3'
+
+vars:
+  container_name: drawdb
+  image_name: mooxe/{{.container_name}}
+
+tasks:
+
+  help: task --list-all
+  default:
+    - task: help
+
+  build:
+    - docker build
+        --build-arg container_proxy=$container_proxy
+        -t {{.image_name}} .
+  rebuild:
+    - docker build
+        --no-cache
+        --build-arg container_proxy=$container_proxy
+        -t {{.image_name}} .
+  push: docker push {{.image_name}}
+  run_proxy:
+    - docker run -ti --rm
+        -e http_proxy=$container_proxy
+        -e https_proxy=$container_proxy
+        --name {{.container_name}}
+        {{.image_name}}
+  run:
+    - docker run -ti --rm
+        -e container_proxy=$container_proxy
+        --name {{.container_name}}
+        {{.image_name}}
+
+  rund:
+    - docker run -d
+        --name {{.container_name}}
+        {{.image_name}}
+
+  logs: docker logs -f {{.container_name}}
+  rm: docker rm -f {{.container_name}}

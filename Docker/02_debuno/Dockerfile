@@ -26,7 +26,7 @@ WORKDIR /app
 ARG container_proxy
 
 ARG DENO_RELEASE_URL=https://github.com/denoland/deno/releases
-ARG DENO_VERSION=1.43.6
+ARG DENO_VERSION=1.44.2
 RUN export http_proxy=${container_proxy} \
 &&  export https_proxy=${container_proxy} \
 &&  aria2c \
@@ -36,7 +36,7 @@ RUN export http_proxy=${container_proxy} \
 &&  mv ./deno /usr/local/bin
 
 ARG BUN_RELEASE_URL=https://github.com/oven-sh/bun/releases
-ARG BUN_VERSION=1.1.9
+ARG BUN_VERSION=1.1.12
 RUN export http_proxy=${container_proxy} \
 &&  export https_proxy=${container_proxy} \
 &&  aria2c \
@@ -111,7 +111,7 @@ RUN export http_proxy=${container_proxy} \
 # &&  rm libssl${LIBSSL_VERSION}_amd64.deb
 
 ARG FNM_RELEASE_URL=https://github.com/Schniz/fnm/releases
-ARG FNM_VERSION=1.35.1
+ARG FNM_VERSION=1.37.0
 RUN export http_proxy=${container_proxy} \
 &&  export https_proxy=${container_proxy} \
 &&  aria2c \
